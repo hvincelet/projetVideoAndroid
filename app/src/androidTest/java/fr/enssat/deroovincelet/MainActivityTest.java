@@ -94,7 +94,7 @@ public class MainActivityTest {
      * Teste si le clic du boutton Title entraine la modification de la durée de la vidéo à 25000
      * */
     @Test
-    public void webViewIsTheRightUrlWhenVideoIsClicked(){
+    public void videoIsTheRightDurationWhenButtonIsClicked(){
         ViewInteraction button = onView(withId(R.id.button3));
         button.perform(click());
         assertEquals(76000, videoDuration);
