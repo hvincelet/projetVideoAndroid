@@ -2,20 +2,22 @@ package fr.enssat.deroovincelet;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 public class LiveDataContainerImplementation implements LiveDataContainer {
 
-    private MutableLiveData<VideoStatus> videoStatus;
+    private MutableLiveData<VideoStatus> videoStatus = new MutableLiveData<>();
     private int previousDuration = 0;
 
     public LiveDataContainerImplementation() {
-        videoStatus = new MutableLiveData<>();
+        videoStatus.setValue(new VideoStatus(0));
     }
 
     @Override
     public void changeStatusByVideo(int newDuration) {
         if(newDuration != previousDuration){
             videoStatus.setValue(new VideoStatus(newDuration));
+            Log.i("VIDEO_DURATION_CHANGED:",""+newDuration+"s");
             previousDuration = newDuration;
         }
     }
@@ -33,8 +35,6 @@ public class LiveDataContainerImplementation implements LiveDataContainer {
 
     @Override
     public LiveData<VideoStatus> getVideoStatus() {
-        videoStatus = new MutableLiveData<>();
-        ( videoStatus).setValue(new VideoStatus(0));
         return videoStatus;
     }
 }

@@ -22,10 +22,16 @@ import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private VideoView myVideoView;
+    public VideoView myVideoView;
     private VideoWebViewModel mViewModel;
     private MediaController mediaControls;
     private WebView web;
+    public static int videoDuration = 0;
+
+    public VideoWebViewModel getViewModel()
+    {
+        return mViewModel;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable VideoStatus videoStatus) {
                 myVideoView.seekTo(videoStatus.videoPosition);
+                videoDuration = videoStatus.videoPosition;
                 String url = "https://en.wikipedia.org/wiki/Introduction";
                 if(videoStatus.videoPosition >= 25000) url = "https://en.wikipedia.org/wiki/Title";
                 if(videoStatus.videoPosition >= 76000) url = "https://en.wikipedia.org/wiki/Butterfly";
